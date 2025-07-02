@@ -11,7 +11,7 @@ Great, Lavanya! Let's add **build and deploy status badges** to your `README.md`
 
 Here’s a starter `README.md` for your `ecommerce-app` with proper badges:
 
-```markdown
+
 # 🛍️ E-commerce Backend API
 
 ![Python](https://img.shields.io/badge/python-3.9-blue.svg)
