@@ -7,6 +7,10 @@
 ![MongoDB](https://img.shields.io/badge/database-mongodb-brightgreen)
 ![Render](https://img.shields.io/badge/deployed%20on-Render-purple)
 
+ ![License](https://img.shields.io/github/license/Lavanyajc/ecommerce-app.svg)
+ ![GitHub last commit](https://img.shields.io/github/last-commit/Lavanyajc/ecommerce-app)
+ ![Issues](https://img.shields.io/github/issues/Lavanyajc/ecommerce-app)
+
 > A simple Dockerized Flask + MongoDB e-commerce backend API.
 
 ---
@@ -40,7 +44,7 @@ ecommerce-app/
       ├── Dockerfile
       └── requirements.txt
 
-````
+```
 
 ## 🏁 Next Goals
 
@@ -55,15 +59,10 @@ ecommerce-app/
 +------------+            +--------------+            +------------+
    port 8080                port 5000                   port 27017
 
+---
 
 
-
-
-
-
- ```
-  ![License](https://img.shields.io/github/license/Lavanyajc/ecommerce-app.svg)
-  ![GitHub last commit](https://img.shields.io/github/last-commit/Lavanyajc/ecommerce-app)
-  ![Issues](https://img.shields.io/github/issues/Lavanyajc/ecommerce-app)
+ 
+ 
 
 
