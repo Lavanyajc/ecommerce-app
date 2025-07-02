@@ -23,15 +23,20 @@ jobs:
       - name: 🐳 Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: 🔨 Build Docker Image
-        run: |
-          docker build -t ecommerce-backend ./backend
+      - name: 🔨 Build Backend Docker Image
+        run: docker build -t ecommerce-backend ./backend
 
-      - name: ✅ Run Container
+      - name: 🚀 Run Backend Container
         run: |
-          docker run -d --name ecommerce-backend-test --network="host" -e MONGO_URI=mongodb://localhost:27017/ecommerce ecommerce-backend
-          sleep 10  # wait for app to start
+          docker run -d --name ecommerce-backend-test \
+            --network="host" \
+            -e MONGO_URI=mongodb://localhost:27017/ecommerce \
+            ecommerce-backend
+          sleep 10
 
-      - name: 🔍 Test endpoint
+      - name: 🔍 Test /products API
         run: |
-          curl --fail http://localhost:5000 || exit 1
+          curl --fail http://localhost:5000/products
+
+      - name: 🧹 Cleanup
+        run: docker rm -f ecommerce-backend-test || true
