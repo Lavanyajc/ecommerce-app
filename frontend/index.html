@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>🛒 E-Commerce Showcase</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #333;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    section {
+      padding: 40px 20px;
+    }
+    h2 {
+      color: #222;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .product-card {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🛍️ Welcome to Lavanya's E-Commerce Portal</h1>
+</header>
+
+<section id="men">
+  <h2>👕 Men's Wear</h2>
+  <div class="products" id="men-products"></div>
+</section>
+
+<section id="women">
+  <h2>👗 Women's Wear</h2>
+  <div class="products" id="women-products"></div>
+</section>
+
+<section id="electronics">
+  <h2>💻 Electronics</h2>
+  <div class="products" id="electronics-products"></div>
+</section>
+
+<section id="home">
+  <h2>🏠 Home Essentials</h2>
+  <div class="products" id="home-products"></div>
+</section>
+
+<section id="sports">
+  <h2>🏏 Sports</h2>
+  <div class="products" id="sports-products"></div>
+</section>
+
+<section id="books">
+  <h2>📚 Books</h2>
+  <div class="products" id="books-products"></div>
+</section>
+
+<script>
+  const categoryMap = {
+    'Men': 'men-products',
+    'Women': 'women-products',
+    'Electronics': 'electronics-products',
+    'Home': 'home-products',
+    'Sports': 'sports-products',
+    'Books': 'books-products'
+  };
+
+  fetch("http://localhost:5000/products")  // Change to http://backend:5000/products if using Docker Compose
+    .then(response => response.json())
+    .then(products => {
+      products.forEach(p => {
+        const containerId = categoryMap[p.category];
+        if (containerId) {
+          const div = document.getElementById(containerId);
+          const card = document.createElement("div");
+          card.className = "product-card";
+          card.textContent = p.name;
+          div.appendChild(card);
+        }
+      });
+    })
+    .catch(err => console.error("Fetch error:", err));
+</script>
+
+</body>
+</html>
+
