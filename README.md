@@ -48,7 +48,7 @@ ecommerce-app/
 * [ ] Add MongoDB Atlas support
 * [ ] Deploy frontend + reverse proxy with NGINX
 
-
+```
 +------------+            +--------------+            +------------+
 |  Frontend  |──fetch──▶︎ |   Backend    |──query──▶︎ |  MongoDB   |
 | (NGINX)    |            | (Flask API)  |            | (Database) |
@@ -61,7 +61,7 @@ ecommerce-app/
 
 
 
- 
+ ```
   ![License](https://img.shields.io/github/license/Lavanyajc/ecommerce-app.svg)
   ![GitHub last commit](https://img.shields.io/github/last-commit/Lavanyajc/ecommerce-app)
   ![Issues](https://img.shields.io/github/issues/Lavanyajc/ecommerce-app)
