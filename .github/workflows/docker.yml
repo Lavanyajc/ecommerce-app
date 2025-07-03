@@ -1,20 +1,12 @@
-name: CI - Build Docker Backend
+name: CI/CD - Dockerized Ecommerce App
 
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
-    services:
-      mongo:
-        image: mongo
-        ports:
-          - 27017:27017
 
     steps:
       - name: 📥 Checkout code
@@ -26,17 +18,17 @@ jobs:
       - name: 🔨 Build Backend Docker Image
         run: docker build -t ecommerce-backend ./backend
 
-      - name: 🚀 Run Backend Container
-        run: |
-          docker run -d --name ecommerce-backend-test \
-            --network="host" \
-            -e MONGO_URI=mongodb://localhost:27017/ecommerce \
-            ecommerce-backend
-          sleep 10
+      - name: 🔨 Build Frontend Docker Image
+        run: docker build -t ecommerce-frontend ./frontend
 
-      - name: 🔍 Test /products API
-        run: |
-          curl --fail http://localhost:5000/products
-
-      - name: 🧹 Cleanup
-        run: docker rm -f ecommerce-backend-test || true
+      - name: 🚀 SSH and Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ~/ecommerce-app
+            git pull origin main
+            docker-compose down
+            docker-compose up -d --build
