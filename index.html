@@ -10,11 +10,16 @@
       --bg: #f5f7fa;
       --text: #1f2937;
       --card: #ffffff;
+      --btn-bg: #2563eb;
+      --btn-text: #ffffff;
     }
+
     body.dark {
-      --bg: #111827;
-      --text: #f1f5f9;
-      --card: #1f2937;
+      --bg: #0f172a;
+      --text: #e2e8f0;
+      --card: #1e293b;
+      --btn-bg: #38bdf8;
+      --btn-text: #000000;
     }
 
     * {
@@ -28,7 +33,7 @@
       background-color: var(--bg);
       color: var(--text);
       font-size: 8pt;
-      transition: background 0.3s, color 0.3s;
+      transition: all 0.4s ease;
     }
 
     header {
@@ -47,7 +52,8 @@
       position: fixed;
       top: 1rem;
       left: 1rem;
-      background: #facc15;
+      background: var(--btn-bg);
+      color: var(--btn-text);
       border: none;
       border-radius: 6px;
       padding: 0.4rem 0.6rem;
@@ -74,9 +80,13 @@
       flex-wrap: wrap;
     }
 
+    body.dark .hero {
+      background-color: #1e293b;
+    }
+
     .hero img.luffy-quote {
-      width: 60px;
-      height: 60px;
+      width: 80px;
+      height: 80px;
       border-radius: 12px;
     }
 
@@ -90,18 +100,14 @@
     }
 
     .hero .text button {
-      background-color: #2563eb;
-      color: white;
+      background-color: var(--btn-bg);
+      color: var(--btn-text);
       padding: 0.3rem 0.7rem;
       border: none;
       border-radius: 6px;
       cursor: pointer;
       margin-top: 0.6rem;
       font-size: 0.75rem;
-    }
-
-    .hero .text button:hover {
-      background-color: #1d4ed8;
     }
 
     #quote {
@@ -128,6 +134,7 @@
       padding: 0.8rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       text-align: left;
+      transition: background 0.3s ease;
     }
 
     .product-card h3 {
@@ -153,6 +160,11 @@
       background: #f1f5f9;
       color: #6b7280;
       margin-top: 2rem;
+    }
+
+    body.dark footer {
+      background-color: #1f2937;
+      color: #94a3b8;
     }
   </style>
 </head>
