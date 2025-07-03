@@ -14,45 +14,42 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f5f7fa;
+      background-color: #f8fafc;
       color: #1f2937;
-      padding-bottom: 4rem;
-      position: relative;
+      font-size: 12px;
+      line-height: 1.5;
+      padding-bottom: 3rem;
     }
 
     header {
-      background: linear-gradient(to right, #3b82f6, #1e3a8a);
+      background: linear-gradient(to right, #2563eb, #1e40af);
       color: white;
-      padding: 2rem;
+      padding: 1.5rem 1rem;
+      position: relative;
       text-align: center;
     }
 
     header h1 {
-      font-size: 2rem;
+      font-size: 1.4rem;
       margin-bottom: 0.3rem;
     }
 
     header p {
-      font-size: 1rem;
+      font-size: 0.9rem;
       opacity: 0.9;
     }
 
-    /* Floating GIFs */
-    .gif-left,
-    .gif-right {
-      position: fixed;
-      top: 20px;
-      width: 100px;
-      z-index: 999;
-      opacity: 0.9;
-    }
-
-    .gif-left {
-      left: 10px;
-    }
-
-    .gif-right {
-      right: 10px;
+    .jc-logo {
+      position: absolute;
+      left: 1rem;
+      top: 1.2rem;
+      font-weight: bold;
+      font-size: 1.2rem;
+      background: white;
+      color: #1e3a8a;
+      padding: 0.3rem 0.7rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
     .hero {
@@ -61,28 +58,38 @@
       justify-content: center;
       flex-wrap: wrap;
       background-color: #e0f2fe;
-      padding: 2rem 1rem;
-      gap: 2rem;
+      padding: 1.5rem 1rem;
+      gap: 1.5rem;
       text-align: center;
     }
 
+    .hero img {
+      width: 150px;
+      border-radius: 12px;
+    }
+
     .hero .text {
-      max-width: 400px;
+      max-width: 380px;
     }
 
     .hero .text h2 {
-      font-size: 1.2rem;
+      font-size: 1.05rem;
       margin-bottom: 0.5rem;
       color: #1e3a8a;
+    }
+
+    .hero .text p {
+      font-size: 0.85rem;
+      color: #334155;
     }
 
     .hero .text button {
       background-color: #2563eb;
       color: white;
-      padding: 0.4rem 1rem;
-      font-size: 0.85rem;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.75rem;
       border: none;
-      border-radius: 6px;
+      border-radius: 5px;
       cursor: pointer;
       margin-top: 1rem;
     }
@@ -91,13 +98,8 @@
       background-color: #1d4ed8;
     }
 
-    .hero img {
-      width: 180px;
-      border-radius: 12px;
-    }
-
     main {
-      padding: 2rem 1rem;
+      padding: 1.5rem 1rem;
       max-width: 1000px;
       margin: auto;
     }
@@ -105,57 +107,48 @@
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1.5rem;
+      gap: 1.2rem;
     }
 
     .product-card {
       background-color: white;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
       padding: 1rem;
-      text-align: left;
-      transition: transform 0.2s;
-    }
-
-    .product-card:hover {
-      transform: translateY(-5px);
     }
 
     .product-card h3 {
-      font-size: 1rem;
-      color: #111827;
-      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+      color: #1e293b;
     }
 
     .product-card p {
-      font-size: 0.85rem;
-      color: #4b5563;
+      font-size: 0.8rem;
+      color: #475569;
     }
 
     .loading, .error {
       text-align: center;
       margin-top: 2rem;
-      font-weight: 600;
+      font-weight: 500;
       color: #dc2626;
     }
 
     footer {
       text-align: center;
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       padding: 1.5rem;
       background-color: #f1f5f9;
-      color: #6b7280;
-      margin-top: 3rem;
+      color: #64748b;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating GIFs -->
-  <img src="assets/Luffy.gif" alt="Luffy Standing" class="gif-left" />
-  <img src="assets/run.gif" alt="Luffy Running" class="gif-right" />
-
   <header>
+    <div class="jc-logo">JC</div>
     <h1>🛒 JC E-Commerce</h1>
     <p>Now Featuring Monkey D. Luffy 🏴‍☠️</p>
   </header>
@@ -166,7 +159,7 @@
       <h2>“I’m gonna be the King of the Pirates!”</h2>
       <p>Captain Luffy says: Buy cool stuff or walk the plank!</p>
       <button onclick="showQuote()">🎁 Show Me a Surprise Quote</button>
-      <p id="quote" style="margin-top: 1rem; font-style: italic;"></p>
+      <p id="quote" style="margin-top: 0.8rem; font-style: italic;"></p>
     </div>
   </section>
 
@@ -181,7 +174,7 @@
   </footer>
 
   <script>
-    const API_URL = 'https://ecommerce-app-backend.com/products';  // Replace with your actual backend if needed
+    const API_URL = 'https://ecommerce-app-backend.com/products';
     const quotes = [
       "Power isn't determined by your size, but the size of your heart and dreams!",
       "I have a crew that believes in me. That’s all I need.",
@@ -218,12 +211,12 @@
             container.appendChild(card);
           });
         } else {
-          errorMsg.textContent = '⚠️ No products found, wait for a while!';
+          errorMsg.textContent = '⚠️ No products found!';
         }
 
       } catch (err) {
         loading.style.display = 'none';
-        errorMsg.textContent = '❌ Not connected to backend yet. Please wait!';
+        errorMsg.textContent = '❌ Not connected to backend.';
         console.error(err);
       }
     }
