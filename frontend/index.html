@@ -19,13 +19,13 @@
   <p>This is the frontend running on Docker!</p>
 
   <script>
-    fetch('/api/products')
+    fetch('http://localhost:5000/products')
       .then(res => res.json())
       .then(data => {
         document.body.innerHTML += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
       })
       .catch(err => {
-        document.body.innerHTML += `<p style="color:red;">Backend not reachable</p>`;
+        document.body.innerHTML += `<p style="color:red;">Backend not reachable: ${err}</p>`;
       });
   </script>
 </body>
