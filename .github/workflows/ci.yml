@@ -2,7 +2,7 @@ name: CI/CD - Dockerized Ecommerce App
 
 on:
   push:
-    branches: [main]  # Adjust if your branch is not 'main'
+    branches: [main]  #CI/CD Adjust if your branch is not 'main'
 
 jobs:
   build-and-deploy:
