@@ -2,189 +2,193 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JC E-Commerce | Gear 6 Edition</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JC E-Commerce | Gear 6</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #f5f7fa;
       --text: #1f2937;
-      --card: white;
-      --muted: #4b5563;
+      --card: #ffffff;
     }
     body.dark {
       --bg: #111827;
       --text: #f1f5f9;
       --card: #1f2937;
-      --muted: #9ca3af;
     }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--bg);
       color: var(--text);
-      padding-bottom: 4rem;
-      transition: all 0.3s ease;
+      font-size: 8pt;
+      transition: background 0.3s, color 0.3s;
     }
-    .toggle-dark {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      cursor: pointer;
-      background: var(--card);
-      border: none;
-      padding: 0.4rem 0.8rem;
-      border-radius: 8px;
-      color: var(--text);
-      font-weight: bold;
-      font-size: 0.75rem;
-      box-shadow: 0 0 6px rgba(0,0,0,0.1);
-    }
+
     header {
       background: linear-gradient(to right, #3b82f6, #1e3a8a);
       color: white;
       padding: 2rem;
       text-align: center;
     }
+
     header h1 {
-      font-size: 2rem;
-      margin-bottom: 0.3rem;
+      font-size: 1.5rem;
+      margin-bottom: 0.2rem;
     }
-    header p {
-      font-size: 1rem;
-      opacity: 0.9;
+
+    .dark-toggle {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background: #facc15;
+      border: none;
+      border-radius: 6px;
+      padding: 0.4rem 0.6rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      z-index: 100;
     }
+
+    .gif-top-right {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      width: 100px;
+      z-index: 10;
+    }
+
     .hero {
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1.5rem;
       background-color: #e0f2fe;
-      padding: 2rem 1rem;
-      gap: 2rem;
-      text-align: center;
+      flex-wrap: wrap;
     }
+
+    .hero img.luffy-quote {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+    }
+
     .hero .text {
-      max-width: 400px;
+      max-width: 500px;
     }
+
     .hero .text h2 {
-      font-size: 1.3rem;
+      font-size: 1rem;
       margin-bottom: 0.5rem;
-      color: #1e3a8a;
     }
+
     .hero .text button {
       background-color: #2563eb;
       color: white;
-      padding: 0.5rem 1rem;
+      padding: 0.3rem 0.7rem;
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      margin-top: 1rem;
+      margin-top: 0.6rem;
+      font-size: 0.75rem;
     }
+
     .hero .text button:hover {
       background-color: #1d4ed8;
     }
-    .hero img {
-      width: 200px;
-      border-radius: 12px;
+
+    #quote {
+      margin-top: 0.6rem;
+      font-style: italic;
+      font-size: 0.8rem;
     }
-    .running-luffy {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-    }
-    .running-luffy img {
-      width: 90px;
-    }
+
     main {
-      padding: 2rem 1rem;
+      padding: 1rem;
       max-width: 1100px;
       margin: auto;
     }
+
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
     }
+
     .product-card {
       background-color: var(--card);
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-      padding: 1rem;
+      border-radius: 8px;
+      padding: 0.8rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       text-align: left;
     }
+
     .product-card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
     }
+
     .product-card p {
-      font-size: 0.85rem;
-      color: var(--muted);
+      font-size: 0.75rem;
     }
+
     .loading, .error {
       text-align: center;
-      margin-top: 2rem;
-      font-weight: 600;
+      margin-top: 1rem;
+      font-weight: bold;
       color: #dc2626;
     }
+
     footer {
       text-align: center;
-      font-size: 0.75rem;
-      padding: 1.5rem;
-      background-color: #f1f5f9;
+      font-size: 0.7rem;
+      padding: 1rem;
+      background: #f1f5f9;
       color: #6b7280;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- 🔘 DARK MODE TOGGLE -->
-  <button class="toggle-dark" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+  <button class="dark-toggle" onclick="toggleDarkMode()">🌗 Toggle</button>
 
-  <!-- 🏃 RUNNING LUFFY -->
-  <div class="running-luffy">
-    <img src="assets/run.gif" alt="Running Luffy" />
-  </div>
+  <img src="assets/run.gif" alt="Running Luffy" class="gif-top-right" />
 
-  <!-- 🧢 HEADER -->
   <header>
-    <h1>🛒 JC E-Commerce</h1>
-    <p>Now Featuring Monkey D. Luffy 🏴‍☠️</p>
+    <h1>🛒 JC E-Commerce | Gear 6</h1>
+    <p>Explore amazing products powered by Luffy ⚡</p>
   </header>
 
-  <!-- 🎯 HERO + QUOTE -->
   <section class="hero">
+    <img src="assets/luffy.gif" alt="Luffy" class="luffy-quote" />
     <div class="text">
-      <h2>“I’m gonna be the King of the Pirates!”</h2>
-      <p>Captain Luffy says: Buy cool stuff or walk the plank!</p>
-      <button onclick="showQuote()">🎁 Show Me a Surprise Quote</button>
-      <div style="display: flex; align-items: center; gap: 1rem; justify-content: center; margin-top: 1rem;">
-        <img src="assets/luffy.gif" alt="Luffy" style="width: 70px; border-radius: 8px;" />
-        <p id="quote" style="font-style: italic;"></p>
-      </div>
+      <h2>"I’m gonna be the King of the Pirates!"</h2>
+      <p>Click below for a quote & sound 🎧</p>
+      <button onclick="showQuote()">🎁 Show Quote</button>
+      <p id="quote"></p>
     </div>
   </section>
 
-  <!-- 🛍️ PRODUCTS -->
   <main>
     <div id="loading" class="loading">⏳ Loading Products...</div>
     <div id="product-list" class="product-grid"></div>
     <div id="error" class="error"></div>
   </main>
 
-  <!-- 📞 FOOTER -->
   <footer>
-    &copy; 2025 JC E-Commerce | Powered by Luffy’s Gear 6 ⚡
+    &copy; 2025 JC E-Commerce | Gear 6 Edition | All Rights Reserved
   </footer>
 
-  <!-- 🔊 AUDIO FILE -->
-  <audio id="ding" src="assets/ding.mp3" preload="auto"></audio>
+  <audio id="sfx" src="assets/sound.mp3" preload="auto"></audio>
 
-  <!-- 💻 SCRIPT -->
   <script>
     const API_URL = 'https://ecommerce-app-backend.com/products';
     const quotes = [
@@ -195,10 +199,9 @@
     ];
 
     function showQuote() {
-      const audio = document.getElementById('ding');
-      audio.play();
       const rand = Math.floor(Math.random() * quotes.length);
       document.getElementById('quote').textContent = quotes[rand];
+      document.getElementById('sfx').play();
     }
 
     function toggleDarkMode() {
@@ -229,11 +232,12 @@
             container.appendChild(card);
           });
         } else {
-          errorMsg.textContent = '⚠️ No products found, wait for a while!';
+          errorMsg.textContent = '⚠️ No products found yet!';
         }
+
       } catch (err) {
         loading.style.display = 'none';
-        errorMsg.textContent = '❌ Backend not reachable yet. Please wait...';
+        errorMsg.textContent = '❌ Backend not reachable yet!';
         console.error(err);
       }
     }
