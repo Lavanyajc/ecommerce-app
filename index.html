@@ -11,26 +11,50 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: 'Inter', sans-serif;
       background-color: #f5f7fa;
       color: #1f2937;
       padding-bottom: 4rem;
+      position: relative;
     }
+
     header {
       background: linear-gradient(to right, #3b82f6, #1e3a8a);
       color: white;
       padding: 2rem;
       text-align: center;
     }
+
     header h1 {
       font-size: 2rem;
       margin-bottom: 0.3rem;
     }
+
     header p {
       font-size: 1rem;
       opacity: 0.9;
     }
+
+    /* Floating GIFs */
+    .gif-left,
+    .gif-right {
+      position: fixed;
+      top: 20px;
+      width: 100px;
+      z-index: 999;
+      opacity: 0.9;
+    }
+
+    .gif-left {
+      left: 10px;
+    }
+
+    .gif-right {
+      right: 10px;
+    }
+
     .hero {
       display: flex;
       align-items: center;
@@ -41,85 +65,95 @@
       gap: 2rem;
       text-align: center;
     }
+
     .hero .text {
       max-width: 400px;
     }
+
     .hero .text h2 {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       margin-bottom: 0.5rem;
       color: #1e3a8a;
     }
+
     .hero .text button {
       background-color: #2563eb;
       color: white;
-      padding: 0.5rem 1rem;
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
       border: none;
       border-radius: 6px;
       cursor: pointer;
       margin-top: 1rem;
     }
+
     .hero .text button:hover {
       background-color: #1d4ed8;
     }
+
     .hero img {
-      width: 200px;
+      width: 180px;
       border-radius: 12px;
     }
-    .running-luffy {
-      text-align: center;
-      margin-top: 2rem;
-    }
-    .running-luffy img {
-      width: 150px;
-    }
-    .running-luffy p {
-      margin-top: 0.5rem;
-      font-weight: 500;
-    }
+
     main {
       padding: 2rem 1rem;
-      max-width: 1100px;
+      max-width: 1000px;
       margin: auto;
     }
+
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 1.5rem;
     }
+
     .product-card {
       background-color: white;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.05);
       padding: 1rem;
       text-align: left;
+      transition: transform 0.2s;
     }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
     .product-card h3 {
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: #111827;
       margin-bottom: 0.5rem;
     }
+
     .product-card p {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #4b5563;
     }
+
     .loading, .error {
       text-align: center;
       margin-top: 2rem;
       font-weight: 600;
       color: #dc2626;
     }
+
     footer {
       text-align: center;
       font-size: 0.85rem;
       padding: 1.5rem;
       background-color: #f1f5f9;
       color: #6b7280;
-      position: relative;
-      bottom: 0;
+      margin-top: 3rem;
     }
   </style>
 </head>
 <body>
+
+  <!-- Floating GIFs -->
+  <img src="assets/Luffy.gif" alt="Luffy Standing" class="gif-left" />
+  <img src="assets/run.gif" alt="Luffy Running" class="gif-right" />
 
   <header>
     <h1>🛒 JC E-Commerce</h1>
@@ -127,7 +161,7 @@
   </header>
 
   <section class="hero">
-    <img src="assets/luffy.gif" alt="Luffy" />
+    <img src="assets/Luffy.gif" alt="Luffy" />
     <div class="text">
       <h2>“I’m gonna be the King of the Pirates!”</h2>
       <p>Captain Luffy says: Buy cool stuff or walk the plank!</p>
@@ -135,11 +169,6 @@
       <p id="quote" style="margin-top: 1rem; font-style: italic;"></p>
     </div>
   </section>
-
-  <div class="running-luffy">
-    <img src="assets/run.gif" alt="Running Luffy" />
-    <p>Running Luffy GIF</p>
-  </div>
 
   <main>
     <div id="loading" class="loading">⏳ Loading Products...</div>
@@ -152,7 +181,7 @@
   </footer>
 
   <script>
-    const API_URL = 'https://ecommerce-app-backend.com/products';  // Replace with actual backend if needed
+    const API_URL = 'https://ecommerce-app-backend.com/products';  // Replace with your actual backend if needed
     const quotes = [
       "Power isn't determined by your size, but the size of your heart and dreams!",
       "I have a crew that believes in me. That’s all I need.",
@@ -194,7 +223,7 @@
 
       } catch (err) {
         loading.style.display = 'none';
-        errorMsg.textContent = 'Not yet connected to backend, plz wait there haha.';
+        errorMsg.textContent = '❌ Not connected to backend yet. Please wait!';
         console.error(err);
       }
     }
