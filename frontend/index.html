@@ -1,48 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>🛍️ E-Commerce Frontend</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f0f0f0;
+      background: #f9f9f9;
       padding: 2rem;
     }
     h1 {
       color: #333;
     }
-    pre {
-      background: #fff;
-      padding: 1rem;
-      border: 1px solid #ccc;
-      overflow-x: auto;
-    }
   </style>
 </head>
 <body>
   <h1>Welcome to My E-Commerce Store</h1>
-  <p>This is the frontend running on Docker!</p>
+  <p>Frontend is running in Docker 🐳</p>
 
-  <div id="product-data">
-    <p>Loading products...</p>
-  </div>
+  <div id="product-list"></div>
 
   <script>
-    fetch('http://localhost:5000/products')  // Make sure backend is accessible on this port
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
+    fetch('http://ecommerce-backend:5000/api/products')
+      .then(response => response.json())
       .then(data => {
-        const container = document.getElementById('product-data');
-        container.innerHTML = `<h3>Products:</h3><pre>${JSON.stringify(data, null, 2)}</pre>`;
+        const container = document.getElementById('product-list');
+        container.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
       })
       .catch(error => {
-        const container = document.getElementById('product-data');
-        container.innerHTML = `<p style="color:red;">Error: Could not fetch products.<br>${error}</p>`;
+        document.body.innerHTML += '<p style="color:red;">❌ Could not reach backend</p>';
+        console.error(error);
       });
   </script>
 </body>
