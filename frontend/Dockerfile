@@ -3,7 +3,7 @@ FROM nginx:alpine
 
 # Optional: custom Nginx config
 # COPY nginx.conf /etc/nginx/conf.d/default.conf
-
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Copy static files into Nginx's public directory
 COPY . /usr/share/nginx/html
 
