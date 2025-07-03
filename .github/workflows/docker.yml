@@ -2,7 +2,7 @@ name: CI/CD - Dockerized Ecommerce App
 
 on:
   push:
-    branches: [main]
+    branches: [main]  # Adjust if your branch is not 'main'
 
 jobs:
   build-and-deploy:
@@ -20,6 +20,9 @@ jobs:
 
       - name: 🔨 Build Frontend Docker Image
         run: docker build -t ecommerce-frontend ./frontend
+
+      - name: ✅ Debug Check
+        run: echo "Docker images built successfully."
 
       - name: 🚀 SSH and Deploy to EC2
         uses: appleboy/ssh-action@master
