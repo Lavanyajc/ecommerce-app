@@ -3,31 +3,71 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🛍️ JC E-Commerce | Home</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>🏴‍☠️ JC E-Commerce | Luffy Edition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f5f7fa;
-      color: #333;
+      background-color: #f8fafc;
+      color: #111827;
       line-height: 1.6;
     }
 
     header {
-      background-color: #1e293b;
-      padding: 1rem 2rem;
-      color: #fff;
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      color: white;
+      padding: 2rem;
       text-align: center;
     }
 
     header h1 {
-      font-size: 1.8rem;
+      font-size: 2.2rem;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 2rem;
+      flex-wrap: wrap;
+      background: #e0f2fe;
+    }
+
+    .hero img {
+      max-width: 300px;
+      border-radius: 20px;
+    }
+
+    .hero .text {
+      max-width: 500px;
+      padding: 1rem;
+    }
+
+    .hero .text h2 {
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero .text button {
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background 0.3s;
+    }
+
+    .hero .text button:hover {
+      background-color: #2563eb;
     }
 
     main {
@@ -44,44 +84,40 @@
 
     .product-card {
       background: #fff;
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 1rem;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
       transition: transform 0.2s ease;
     }
 
     .product-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-5px);
     }
 
     .product-card h2 {
       font-size: 1.1rem;
+      color: #1e3a8a;
       margin-bottom: 0.5rem;
-      color: #1e40af;
     }
 
     .product-card p {
-      font-size: 0.95rem;
       color: #475569;
+      font-size: 0.95rem;
     }
 
-    .error {
-      color: red;
+    .loading, .error {
       text-align: center;
       margin-top: 2rem;
+      font-weight: bold;
+      color: #dc2626;
     }
 
     footer {
       text-align: center;
       padding: 1rem;
+      background: #f1f5f9;
+      color: #6b7280;
       margin-top: 2rem;
-      color: #777;
-    }
-
-    .loading {
-      text-align: center;
-      font-size: 1rem;
-      padding: 2rem;
     }
   </style>
 </head>
@@ -89,8 +125,18 @@
 
   <header>
     <h1>🛍️ JC E-Commerce Store</h1>
-    <p>Your one-stop shop for everything</p>
+    <p>Now featuring Monkey D. Luffy 🏴‍☠️</p>
   </header>
+
+  <section class="hero">
+    <img src="https://i.imgur.com/NFQFv5g.png" alt="Monkey D. Luffy" />
+    <div class="text">
+      <h2>"I’m gonna be the King of the Pirates!"</h2>
+      <p>Captain Luffy says: Buy cool stuff or walk the plank!</p>
+      <button onclick="showQuote()">🎁 Show Me a Surprise Quote</button>
+      <p id="quote" style="margin-top:1rem; font-style: italic;"></p>
+    </div>
+  </section>
 
   <main>
     <div id="loading" class="loading">Loading products...</div>
@@ -99,11 +145,22 @@
   </main>
 
   <footer>
-    &copy; 2025 JC E-Commerce. All rights reserved.
+    &copy; 2025 JC E-Commerce | Powered by Luffy's Gear 5 ⚡
   </footer>
 
   <script>
     const API_URL = 'https://ecommerce-app-backend.com/products';
+    const quotes = [
+      "Power isn't determined by your size, but the size of your heart and dreams!",
+      "I have a crew that believes in me. That’s all I need.",
+      "Forget being a hero. I’m just a guy who’s hungry!",
+      "If you don’t take risks, you can’t create a future."
+    ];
+
+    function showQuote() {
+      const rand = Math.floor(Math.random() * quotes.length);
+      document.getElementById('quote').textContent = quotes[rand];
+    }
 
     async function loadProducts() {
       const loading = document.getElementById('loading');
@@ -129,12 +186,12 @@
             container.appendChild(card);
           });
         } else {
-          errorMsg.textContent = 'No products available.';
+          errorMsg.textContent = 'No products found!';
         }
 
       } catch (err) {
         loading.style.display = 'none';
-        errorMsg.textContent = '❌ Could not reach backend. Please try again later.';
+        errorMsg.textContent = '❌ Could not connect to the backend.';
         console.error(err);
       }
     }
