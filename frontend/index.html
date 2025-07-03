@@ -12,20 +12,37 @@
     h1 {
       color: #333;
     }
+    pre {
+      background: #fff;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      overflow-x: auto;
+    }
   </style>
 </head>
 <body>
   <h1>Welcome to My E-Commerce Store</h1>
   <p>This is the frontend running on Docker!</p>
 
+  <div id="product-data">
+    <p>Loading products...</p>
+  </div>
+
   <script>
-    fetch('http://localhost:5000/products')
-      .then(res => res.json())
-      .then(data => {
-        document.body.innerHTML += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+    fetch('http://localhost:5000/products')  // Make sure backend is accessible on this port
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
       })
-      .catch(err => {
-        document.body.innerHTML += `<p style="color:red;">Backend not reachable: ${err}</p>`;
+      .then(data => {
+        const container = document.getElementById('product-data');
+        container.innerHTML = `<h3>Products:</h3><pre>${JSON.stringify(data, null, 2)}</pre>`;
+      })
+      .catch(error => {
+        const container = document.getElementById('product-data');
+        container.innerHTML = `<p style="color:red;">Error: Could not fetch products.<br>${error}</p>`;
       });
   </script>
 </body>
