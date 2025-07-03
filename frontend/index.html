@@ -29,7 +29,7 @@
   </div>
 
   <script>
-    fetch('http://backend:5000/products')  // Make sure backend is accessible on this port
+    fetch('http://localhost:5000/products')  // Make sure backend is accessible on this port
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
