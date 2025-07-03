@@ -3,171 +3,129 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🏴‍☠️ JC E-Commerce | Luffy Edition</title>
+  <title>🏴‍☠️ JC E-Commerce | Gear 6 Edition</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f8fafc;
+      background: #f8fafc;
       color: #111827;
-      line-height: 1.6;
     }
-
     header {
-      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      background: linear-gradient(to right, #1e3a8a, #2563eb);
       color: white;
-      padding: 2rem;
+      padding: 2rem 1rem;
       text-align: center;
     }
-
-    header h1 {
-      font-size: 2.2rem;
-    }
-
+    header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
     .hero {
       display: flex;
-      align-items: center;
-      justify-content: space-around;
-      padding: 2rem;
       flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
       background: #e0f2fe;
     }
-
     .hero img {
-      max-width: 280px;
+      max-width: 220px;
       border-radius: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin: 1rem;
     }
-
     .hero .text {
-      max-width: 500px;
+      max-width: 400px;
       padding: 1rem;
       text-align: center;
     }
-
     .hero .text h2 {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       margin-bottom: 0.8rem;
     }
-
     .hero .text button {
-      padding: 0.6rem 1.2rem;
-      font-size: 1rem;
-      background-color: #3b82f6;
+      padding: 0.5rem 1rem;
+      background: #2563eb;
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       margin-top: 1rem;
-      transition: background 0.3s, transform 0.3s;
+      transition: background 0.3s;
     }
-
     .hero .text button:hover {
-      background-color: #2563eb;
-      transform: scale(1.05);
+      background: #1d4ed8;
     }
-
-    #quote {
-      margin-top: 1rem;
-      font-style: italic;
-      transition: all 0.3s ease;
-      color: #1e3a8a;
+    .gif-section {
+      text-align: center;
+      margin: 2rem 0;
     }
-
+    .gif-section img {
+      max-width: 150px;
+      border-radius: 12px;
+    }
     main {
-      padding: 2rem;
       max-width: 1100px;
       margin: auto;
+      padding: 2rem 1rem;
     }
-
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 1.5rem;
     }
-
     .product-card {
       background: #fff;
       border-radius: 10px;
       padding: 1rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
       transition: transform 0.2s ease;
     }
-
     .product-card:hover {
       transform: translateY(-5px);
     }
-
     .product-card h2 {
       font-size: 1.1rem;
       color: #1e3a8a;
       margin-bottom: 0.5rem;
     }
-
     .product-card p {
       color: #475569;
       font-size: 0.95rem;
     }
-
     .loading, .error {
       text-align: center;
       margin-top: 2rem;
       font-weight: bold;
       color: #dc2626;
     }
-
-    .luffy-gif-block {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      padding: 2rem;
-      background: #f0f9ff;
-      flex-wrap: wrap;
-    }
-
-    .luffy-gif-block img {
-      width: 250px;
-      border-radius: 12px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
-
     footer {
+      background: #f1f5f9;
       text-align: center;
       padding: 1rem;
-      background: #f1f5f9;
+      margin-top: 3rem;
       color: #6b7280;
-      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>🛍️ JC E-Commerce Store</h1>
+    <h1>🛍️ JC E-Commerce</h1>
     <p>Now featuring Monkey D. Luffy 🏴‍☠️</p>
   </header>
 
   <section class="hero">
-    <img src="https://static.wikia.nocookie.net/onepiece/images/e/e9/Monkey_D._Luffy_Anime_Post_Timeskip_Infobox.png"
-     alt="Monkey D. Luffy" />
+    <img src="https://static.wikia.nocookie.net/onepiece/images/e/e9/Monkey_D._Luffy_Anime_Post_Timeskip_Infobox.png" alt="Luffy PNG" />
     <div class="text">
-      <h2>"I’m gonna be the King of the Pirates!"</h2>
+      <h2>"I'm gonna be the King of the Pirates!"</h2>
       <p>Captain Luffy says: Buy cool stuff or walk the plank!</p>
       <button onclick="showQuote()">🎁 Show Me a Surprise Quote</button>
-      <p id="quote"></p>
+      <p id="quote" style="margin-top:1rem; font-style: italic;"></p>
     </div>
   </section>
 
-  <section class="luffy-gif-block">
-    <img src="luffy-gif.gif" alt="Never Give Up Luffy GIF" />
-    <img src="luffy-run.gif" alt="Running Luffy GIF" />
-  </section>
+  <div class="gif-section">
+    <img src="run GIF.gif" alt="Running Luffy GIF">
+  </div>
 
   <main>
     <div id="loading" class="loading">Loading products...</div>
@@ -176,7 +134,7 @@
   </main>
 
   <footer>
-    &copy; 2025 JC E-Commerce | Powered by Luffy's Gear 5 ⚡
+    &copy; 2025 JC E-Commerce | Powered by Luffy’s Gear 6 ⚡
   </footer>
 
   <script>
@@ -190,12 +148,7 @@
 
     function showQuote() {
       const rand = Math.floor(Math.random() * quotes.length);
-      const quoteEl = document.getElementById('quote');
-      quoteEl.style.opacity = 0;
-      setTimeout(() => {
-        quoteEl.textContent = quotes[rand];
-        quoteEl.style.opacity = 1;
-      }, 200);
+      document.getElementById('quote').textContent = quotes[rand];
     }
 
     async function loadProducts() {
@@ -207,7 +160,6 @@
         const res = await fetch(API_URL);
         if (!res.ok) throw new Error('Failed to fetch products');
         const data = await res.json();
-
         loading.style.display = 'none';
 
         if (Array.isArray(data) && data.length > 0) {
@@ -227,7 +179,7 @@
 
       } catch (err) {
         loading.style.display = 'none';
-        errorMsg.textContent = '❌ Wait a little till I connect backend hehee';
+        errorMsg.textContent = '❌ Could not connect to backend.';
         console.error(err);
       }
     }
