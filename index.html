@@ -3,129 +3,94 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🏴‍☠️ JC E-Commerce | Gear 6 Edition</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <title>🛍️ JC E-Commerce | Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
-      background: #f8fafc;
-      color: #111827;
+      background-color: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
     }
+
     header {
-      background: linear-gradient(to right, #1e3a8a, #2563eb);
-      color: white;
-      padding: 2rem 1rem;
+      background-color: #1e293b;
+      padding: 1rem 2rem;
+      color: #fff;
       text-align: center;
     }
-    header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-    .hero {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem 1rem;
-      background: #e0f2fe;
+
+    header h1 {
+      font-size: 1.8rem;
     }
-    .hero img {
-      max-width: 220px;
-      border-radius: 20px;
-      margin: 1rem;
-    }
-    .hero .text {
-      max-width: 400px;
-      padding: 1rem;
-      text-align: center;
-    }
-    .hero .text h2 {
-      font-size: 1.4rem;
-      margin-bottom: 0.8rem;
-    }
-    .hero .text button {
-      padding: 0.5rem 1rem;
-      background: #2563eb;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 1rem;
-      transition: background 0.3s;
-    }
-    .hero .text button:hover {
-      background: #1d4ed8;
-    }
-    .gif-section {
-      text-align: center;
-      margin: 2rem 0;
-    }
-    .gif-section img {
-      max-width: 150px;
-      border-radius: 12px;
-    }
+
     main {
+      padding: 2rem;
       max-width: 1100px;
       margin: auto;
-      padding: 2rem 1rem;
     }
+
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 1.5rem;
     }
+
     .product-card {
       background: #fff;
-      border-radius: 10px;
+      border-radius: 8px;
       padding: 1rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
       transition: transform 0.2s ease;
     }
+
     .product-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-4px);
     }
+
     .product-card h2 {
       font-size: 1.1rem;
-      color: #1e3a8a;
       margin-bottom: 0.5rem;
+      color: #1e40af;
     }
+
     .product-card p {
-      color: #475569;
       font-size: 0.95rem;
+      color: #475569;
     }
-    .loading, .error {
+
+    .error {
+      color: red;
       text-align: center;
       margin-top: 2rem;
-      font-weight: bold;
-      color: #dc2626;
     }
+
     footer {
-      background: #f1f5f9;
       text-align: center;
       padding: 1rem;
-      margin-top: 3rem;
-      color: #6b7280;
+      margin-top: 2rem;
+      color: #777;
+    }
+
+    .loading {
+      text-align: center;
+      font-size: 1rem;
+      padding: 2rem;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>🛍️ JC E-Commerce</h1>
-    <p>Now featuring Monkey D. Luffy 🏴‍☠️</p>
+    <h1>🛍️ JC E-Commerce Store</h1>
+    <p>Your one-stop shop for everything</p>
   </header>
-
-  <section class="hero">
-    <img src="https://static.wikia.nocookie.net/onepiece/images/e/e9/Monkey_D._Luffy_Anime_Post_Timeskip_Infobox.png" alt="Luffy PNG" />
-    <div class="text">
-      <h2>"I'm gonna be the King of the Pirates!"</h2>
-      <p>Captain Luffy says: Buy cool stuff or walk the plank!</p>
-      <button onclick="showQuote()">🎁 Show Me a Surprise Quote</button>
-      <p id="quote" style="margin-top:1rem; font-style: italic;"></p>
-    </div>
-  </section>
-
-  <div class="gif-section">
-    <img src="run GIF.gif" alt="Running Luffy GIF">
-  </div>
 
   <main>
     <div id="loading" class="loading">Loading products...</div>
@@ -134,22 +99,11 @@
   </main>
 
   <footer>
-    &copy; 2025 JC E-Commerce | Powered by Luffy’s Gear 6 ⚡
+    &copy; 2025 JC E-Commerce. All rights reserved.
   </footer>
 
   <script>
     const API_URL = 'https://ecommerce-app-backend.com/products';
-    const quotes = [
-      "Power isn't determined by your size, but the size of your heart and dreams!",
-      "I have a crew that believes in me. That’s all I need.",
-      "Forget being a hero. I’m just a guy who’s hungry!",
-      "If you don’t take risks, you can’t create a future."
-    ];
-
-    function showQuote() {
-      const rand = Math.floor(Math.random() * quotes.length);
-      document.getElementById('quote').textContent = quotes[rand];
-    }
 
     async function loadProducts() {
       const loading = document.getElementById('loading');
@@ -160,6 +114,7 @@
         const res = await fetch(API_URL);
         if (!res.ok) throw new Error('Failed to fetch products');
         const data = await res.json();
+
         loading.style.display = 'none';
 
         if (Array.isArray(data) && data.length > 0) {
@@ -174,12 +129,12 @@
             container.appendChild(card);
           });
         } else {
-          errorMsg.textContent = 'No products found!';
+          errorMsg.textContent = 'No products available.';
         }
 
       } catch (err) {
         loading.style.display = 'none';
-        errorMsg.textContent = '❌ Could not connect to backend.';
+        errorMsg.textContent = '❌ Could not reach backend. Please try again later.';
         console.error(err);
       }
     }
