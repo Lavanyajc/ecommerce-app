@@ -2,35 +2,145 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>🛍️Welcome to JC E-Commerce Frontend Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🛍️ JC E-Commerce | Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f9f9f9;
-      padding: 2rem;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    h1 {
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f5f7fa;
       color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #1e293b;
+      padding: 1rem 2rem;
+      color: #fff;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .product-card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #1e40af;
+    }
+
+    .product-card p {
+      font-size: 0.95rem;
+      color: #475569;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      color: #777;
+    }
+
+    .loading {
+      text-align: center;
+      font-size: 1rem;
+      padding: 2rem;
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to My E-Commerce Store</h1>
-  <p>Frontend is running in Docker 🐳</p>
 
-  <div id="product-list"></div>
+  <header>
+    <h1>🛍️ JC E-Commerce Store</h1>
+    <p>Your one-stop shop for everything</p>
+  </header>
+
+  <main>
+    <div id="loading" class="loading">Loading products...</div>
+    <div id="product-list" class="product-grid"></div>
+    <div id="error" class="error"></div>
+  </main>
+
+  <footer>
+    &copy; 2025 JC E-Commerce. All rights reserved.
+  </footer>
 
   <script>
-    fetch('https://ecommerce-app-backend.com/products')
-      .then(response => response.json())
-      .then(data => {
-        const container = document.getElementById('product-list');
-        container.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-      })
-      .catch(error => {
-        document.body.innerHTML += '<p style="color:red;">❌ Could not reach backend</p>';
-        console.error(error);
-      });
+    const API_URL = 'https://ecommerce-app-backend.com/products';
+
+    async function loadProducts() {
+      const loading = document.getElementById('loading');
+      const container = document.getElementById('product-list');
+      const errorMsg = document.getElementById('error');
+
+      try {
+        const res = await fetch(API_URL);
+        if (!res.ok) throw new Error('Failed to fetch products');
+        const data = await res.json();
+
+        loading.style.display = 'none';
+
+        if (Array.isArray(data) && data.length > 0) {
+          data.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+              <h2>${product.name || 'Unnamed Product'}</h2>
+              <p>${product.description || 'No description available.'}</p>
+              <p><strong>Price:</strong> ₹${product.price || 'N/A'}</p>
+            `;
+            container.appendChild(card);
+          });
+        } else {
+          errorMsg.textContent = 'No products available.';
+        }
+
+      } catch (err) {
+        loading.style.display = 'none';
+        errorMsg.textContent = '❌ Could not reach backend. Please try again later.';
+        console.error(err);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', loadProducts);
   </script>
+
 </body>
 </html>
