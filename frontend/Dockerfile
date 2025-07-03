@@ -1,4 +1,8 @@
+# Use official Nginx image
 FROM nginx:alpine
 
-COPY index.html /usr/share/nginx/html/index.html
+# Copy custom Nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
+# Copy static site content
+COPY . /usr/share/nginx/html
