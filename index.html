@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🏴‍☠️ JC E-Commerce | Gear 6 Edition</title>
+  <title>🏴‍☠️ JC E-Commerce | Luffy Edition</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -14,64 +14,28 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f0f9ff;
+      background-color: #f8fafc;
       color: #111827;
       line-height: 1.6;
     }
 
-    nav {
-      background: #1e3a8a;
-      color: #fff;
-      padding: 1rem;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      font-weight: bold;
-      border-bottom: 5px dashed #60a5fa;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #facc15;
-    }
-
     header {
-      position: relative;
       background: linear-gradient(135deg, #1e40af, #3b82f6);
       color: white;
       padding: 2rem;
       text-align: center;
-      overflow: hidden;
     }
 
-    header::after {
-      content: "";
-      background: url('https://media.giphy.com/media/l0MYEqEzwMWFCg8rm/giphy.gif') repeat-x;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 200%;
-      height: 30px;
-      animation: wave 5s linear infinite;
-    }
-
-    @keyframes wave {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    header h1 {
+      font-size: 2.2rem;
     }
 
     .hero {
       display: flex;
       align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
+      justify-content: space-around;
       padding: 2rem;
-      gap: 2rem;
+      flex-wrap: wrap;
       background: #e0f2fe;
     }
 
@@ -81,17 +45,18 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    .text {
+    .hero .text {
       max-width: 500px;
+      padding: 1rem;
       text-align: center;
     }
 
-    .text h2 {
+    .hero .text h2 {
       font-size: 1.6rem;
       margin-bottom: 0.8rem;
     }
 
-    .text button {
+    .hero .text button {
       padding: 0.6rem 1.2rem;
       font-size: 1rem;
       background-color: #3b82f6;
@@ -100,10 +65,10 @@
       border-radius: 8px;
       cursor: pointer;
       margin-top: 1rem;
-      transition: all 0.3s;
+      transition: background 0.3s, transform 0.3s;
     }
 
-    .text button:hover {
+    .hero .text button:hover {
       background-color: #2563eb;
       transform: scale(1.05);
     }
@@ -111,23 +76,8 @@
     #quote {
       margin-top: 1rem;
       font-style: italic;
-      color: #1e3a8a;
       transition: all 0.3s ease;
-    }
-
-    .luffy-gif-block {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      padding: 2rem;
-      background: #fef3c7;
-      flex-wrap: wrap;
-    }
-
-    .luffy-gif-block img {
-      width: 250px;
-      border-radius: 12px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      color: #1e3a8a;
     }
 
     main {
@@ -172,6 +122,21 @@
       color: #dc2626;
     }
 
+    .luffy-gif-block {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+      background: #f0f9ff;
+      flex-wrap: wrap;
+    }
+
+    .luffy-gif-block img {
+      width: 250px;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
     footer {
       text-align: center;
       padding: 1rem;
@@ -179,31 +144,13 @@
       color: #6b7280;
       margin-top: 2rem;
     }
-
-    .sound-btn {
-      background-color: #facc15;
-      color: #111827;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-left: 10px;
-      font-weight: bold;
-    }
   </style>
 </head>
 <body>
 
-  <nav>
-    <a href="#">🏴‍☠️ Home</a>
-    <a href="#">Products</a>
-    <a href="#">About Luffy</a>
-    <button class="sound-btn" onclick="toggleSound()">🔊 Voice</button>
-  </nav>
-
   <header>
     <h1>🛍️ JC E-Commerce Store</h1>
-    <p>Gear 6 Frontend - Powered by Luffy ⚡</p>
+    <p>Now featuring Monkey D. Luffy 🏴‍☠️</p>
   </header>
 
   <section class="hero">
@@ -212,7 +159,7 @@
     <div class="text">
       <h2>"I’m gonna be the King of the Pirates!"</h2>
       <p>Captain Luffy says: Buy cool stuff or walk the plank!</p>
-      <button onclick="showQuote()">🎁 Surprise Quote</button>
+      <button onclick="showQuote()">🎁 Show Me a Surprise Quote</button>
       <p id="quote"></p>
     </div>
   </section>
@@ -229,11 +176,8 @@
   </main>
 
   <footer>
-    &copy; 2025 JC E-Commerce | Built with 🍖 by Straw Hat Pirates
+    &copy; 2025 JC E-Commerce | Powered by Luffy's Gear 5 ⚡
   </footer>
-
-  <!-- Audio -->
-  <audio id="luffy-audio" src="luffy-voice.mp3"></audio>
 
   <script>
     const API_URL = 'https://ecommerce-app-backend.com/products';
@@ -252,15 +196,6 @@
         quoteEl.textContent = quotes[rand];
         quoteEl.style.opacity = 1;
       }, 200);
-    }
-
-    function toggleSound() {
-      const audio = document.getElementById("luffy-audio");
-      if (audio.paused) {
-        audio.play();
-      } else {
-        audio.pause();
-      }
     }
 
     async function loadProducts() {
@@ -292,12 +227,13 @@
 
       } catch (err) {
         loading.style.display = 'none';
-        errorMsg.textContent = '❌ Backend not reachable.';
+        errorMsg.textContent = '❌ Wait a little till I connect backend hehee';
         console.error(err);
       }
     }
 
     window.addEventListener('DOMContentLoaded', loadProducts);
   </script>
+
 </body>
 </html>
