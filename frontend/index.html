@@ -21,7 +21,7 @@
   <div id="product-list"></div>
 
   <script>
-    fetch('http://ecommerce-backend:5000/products')
+    fetch('http://backend:5000/products')
       .then(response => response.json())
       .then(data => {
         const container = document.getElementById('product-list');
