@@ -3,7 +3,10 @@ name: 🚀 Deploy Frontend to GitHub Pages
 on:
   push:
     branches:
-      - main  # or 'master' if your default branch is master
+      - main
+
+permissions:
+  contents: write  # ✅ Required to push to gh-pages branch
 
 jobs:
   deploy:
