@@ -31,6 +31,6 @@ jobs:
 
       - name: 🛠️ Build, Tag & Push Backend Docker Image
         run: |
-          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/${{ secrets.BACKEND_ECR_REPOSITORY }}:latest
+          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY_BACKEND }}:latest
           docker build -t $IMAGE_URI ./backend
           docker push $IMAGE_URI
