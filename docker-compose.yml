@@ -1,8 +1,19 @@
 version: '3.8'
 
 services:
+  mongo:
+    image: mongo:6.0
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - ecommerce-net
+
   backend:
-    build: ./backend
+    build: 
+      context: ./backend
     container_name: ecommerce-backend
     ports:
       - "5000:5000"
@@ -10,17 +21,11 @@ services:
       - MONGO_URI=mongodb://mongo:27017/ecommerce
     depends_on:
       - mongo
-
-  mongo:
-    image: mongo
-    container_name: mongodb
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
+    networks:
+      - ecommerce-net
 
   frontend:
-    build:
+    build: 
       context: ./frontend
       dockerfile: Dockerfile
     container_name: ecommerce-frontend
@@ -28,8 +33,12 @@ services:
       - "8080:80"
     depends_on:
       - backend
-    volumes:
-      - ./frontend:/usr/share/nginx/html:ro
+    networks:
+      - ecommerce-net
 
 volumes:
   mongo-data:
+
+networks:
+  ecommerce-net:
+    driver: bridge
