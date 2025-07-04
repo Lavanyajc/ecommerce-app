@@ -24,17 +24,20 @@ services:
     networks:
       - ecommerce-net
 
-  frontend:
-    build: 
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: ecommerce-frontend
-    ports:
-      - "8080:80"
-    depends_on:
-      - backend
-    networks:
-      - ecommerce-net
+ frontend:
+  build: 
+    context: ./frontend
+    dockerfile: Dockerfile
+  container_name: ecommerce-frontend
+  ports:
+    - "8080:80"
+  depends_on:
+    - backend
+  networks:
+    - ecommerce-net
+  volumes:
+    - ./frontend/index.html:/usr/share/nginx/html/index.html
+
 
 volumes:
   mongo-data:
