@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'frontend/**'  # Only trigger if something in frontend/ changes
+
 
 permissions:
   id-token: write
