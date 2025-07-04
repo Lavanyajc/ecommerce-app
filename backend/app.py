@@ -18,7 +18,7 @@ def seed_db():
     {"name": "Saree", "category": "Women"},
     {"name": "Laptop", "category": "Electronics"},
     {"name": "Sofa", "category": "Home"},
-    {"name": "Cricket Bat", "category": "Sports"},
+    {"name": "Cricket-Bat", "category": "Sports"},
     {"name": "Novel", "category": "Books"}
 ])
 
