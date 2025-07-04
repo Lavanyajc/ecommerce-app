@@ -21,3 +21,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./frontend
+#####"We push changes to the main branch, which triggers GitHub Actions for CI/CD.
+#In the CI (Continuous Integration) step, the workflow checks out the code and prepares the files by locating the index.html inside the frontend folder.
+#Once CI passes, in the CD (Continuous Deployment) step, GitHub Actions takes the index.html file and pushes it to the gh-pages branch.
+#Finally, GitHub Pages serves the website from that branch, making the latest version live.
