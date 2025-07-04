@@ -43,7 +43,11 @@ ecommerce-app/
       ├── app.py
       ├── Dockerfile
       └── requirements.txt
-
+|___frontend/
+      |__dockerfile
+      |__index.html
+      |__requirements.txt
+|_____.github/workflows/frontend.yml
 ```
 
 ## 🏁 Next Goals
