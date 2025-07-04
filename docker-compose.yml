@@ -24,22 +24,21 @@ services:
     networks:
       - ecommerce-net
 
-frontend:
-  build:
-    context: ./frontend
-    dockerfile: Dockerfile
-  container_name: ecommerce-app-frontend-1
-  ports:
-    - "8080:80"
-  depends_on:
-    - backend
-  networks:
-    - ecommerce-net
-  volumes:
-    - ./frontend/index.html:/usr/share/nginx/html/index.html
-    - ./assets:/usr/share/nginx/html/assets
-
-
+  frontend:   # ✅ Moved inside 'services' block
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ecommerce-app-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    networks:
+      - ecommerce-net
+    volumes:
+      - ./frontend/index.html:/usr/share/nginx/html/index.html
+      - ./frontend/assets:/usr/share/nginx/html/assets
+      # ⬆️ Use ./frontend/assets instead of ./assets, since assets are inside frontend folder
 
 volumes:
   mongo-data:
