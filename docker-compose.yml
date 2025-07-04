@@ -28,7 +28,7 @@ frontend:
   build:
     context: ./frontend
     dockerfile: Dockerfile
-  container_name: ecommerce-app-frontend
+  container_name: ecommerce-app-frontend-1
   ports:
     - "8080:80"
   depends_on:
