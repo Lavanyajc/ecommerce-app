@@ -1,46 +1,53 @@
-name: CI/CD - Frontend to ECR and EC2
+name: Deploy Frontend to EC2 via ECR
 
 on:
   push:
     branches: [main]
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
+    - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Configure AWS credentials
+    - name: Configure AWS credentials using OIDC
       uses: aws-actions/configure-aws-credentials@v2
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ap-south-1  # change if needed
+        role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+        aws-region: ${{ secrets.AWS_REGION }}
 
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
 
     - name: Build and tag Docker image
+      env:
+        IMAGE_TAG: latest
+        AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+        ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
       run: |
-        IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/my-frontend:latest
-        docker build -t $IMAGE_URI ./frontend
+        IMAGE_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:${IMAGE_TAG}
         echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
+        docker build -t $IMAGE_URI ./frontend
 
-    - name: Push image to ECR
-      run: |
-        docker push $IMAGE_URI
+    - name: Push Docker image to ECR
+      run: docker push $IMAGE_URI
 
-    - name: SSH and deploy on EC2
+    - name: Deploy on EC2 instance via SSH
       uses: appleboy/ssh-action@v1.0.0
       with:
         host: ${{ secrets.EC2_HOST }}
         username: ubuntu
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_URI=${{ env.IMAGE_URI }}
           docker pull $IMAGE_URI
           docker stop frontend || true
           docker rm frontend || true
