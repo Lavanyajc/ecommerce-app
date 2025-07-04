@@ -1,12 +1,14 @@
-# Use official Nginx image
+# Use lightweight nginx image
 FROM nginx:alpine
 
-# Optional: custom Nginx config
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-# Copy static files into Nginx's public directory
-COPY . /usr/share/nginx/html
+# Remove default nginx website files
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copy your custom index.html into nginx web root
+COPY index.html /usr/share/nginx/html/index.html
+
+# Replace default nginx config with your custom config
+COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
