@@ -29,8 +29,12 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name:  Build, Tag & Push Backend Docker Image
+      - name:  Build Tag & Push Backend Docker Image
         run: |
-          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY_BACKEND }}:latest
+          REPOSITORY="${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY_BACKEND }}"
+          IMAGE_URI="$REPOSITORY:latest"
+          echo " Building Docker image: $IMAGE_URI"
+          
           docker build -t $IMAGE_URI ./backend
           docker push $IMAGE_URI
+
