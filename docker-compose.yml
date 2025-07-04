@@ -14,7 +14,7 @@ services:
   backend:
     build: 
       context: ./backend
-    container_name: ecommerce-backend
+    container_name: ecommerce-app-backend
     ports:
       - "5000:5000"
     environment:
@@ -28,7 +28,7 @@ frontend:
   build:
     context: ./frontend
     dockerfile: Dockerfile
-  container_name: ecommerce-frontend
+  container_name: ecommerce-app-frontend
   ports:
     - "8080:80"
   depends_on:
