@@ -24,8 +24,8 @@ services:
     networks:
       - ecommerce-net
 
- frontend:
-  build: 
+frontend:
+  build:
     context: ./frontend
     dockerfile: Dockerfile
   container_name: ecommerce-frontend
@@ -37,6 +37,8 @@ services:
     - ecommerce-net
   volumes:
     - ./frontend/index.html:/usr/share/nginx/html/index.html
+    - ./assets:/usr/share/nginx/html/assets
+
 
 
 volumes:
