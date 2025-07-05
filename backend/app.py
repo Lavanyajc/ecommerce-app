@@ -14,17 +14,46 @@ db = client['ecommerce']
 def seed_db():
     if db.products.count_documents({}) == 0:
         db.products.insert_many([
-    {"name": "T-shirt", "category": "Men"},
-    {"name": "Saree", "category": "Women"},
-    {"name": "Laptop", "category": "Electronics"},
-    {"name": "Sofa", "category": "Home"},
-    {"name": "CricketBat", "category": "Sports"},
-    {"name": "Novel", "category": "Books"}
-])
-
+            {
+                "name": "T-shirt",
+                "category": "Men",
+                "description": "100% cotton casual wear",
+                "price": 499
+            },
+            {
+                "name": "Saree",
+                "category": "Women",
+                "description": "Elegant traditional silk saree",
+                "price": 1499
+            },
+            {
+                "name": "Laptop",
+                "category": "Electronics",
+                "description": "i7, 16GB RAM, 512GB SSD",
+                "price": 55999
+            },
+            {
+                "name": "Sofa",
+                "category": "Home",
+                "description": "Luxury 3-seater sofa",
+                "price": 23999
+            },
+            {
+                "name": "Cricket Bat",
+                "category": "Sports",
+                "description": "Professional grade willow bat",
+                "price": 1999
+            },
+            {
+                "name": "Novel",
+                "category": "Books",
+                "description": "Fictional thriller bestseller",
+                "price": 299
+            }
+        ])
         print("🔹 Seeded products collection with sample data.")
 
-# Seed immediately on startup
+# Seed on startup
 seed_db()
 
 @app.route('/')
@@ -34,8 +63,13 @@ def index():
 @app.route('/products')
 def get_products():
     products = db.products.find()
-    return jsonify([{"name": p["name"]} for p in products])
+    return jsonify([
+        {
+            "name": p.get("name", "Unnamed Product"),
+            "description": p.get("description", "No description available."),
+            "price": p.get("price", "N/A")
+        } for p in products
+    ])
 
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0', port=5000)
-
