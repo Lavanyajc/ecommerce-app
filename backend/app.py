@@ -65,10 +65,11 @@ def get_products():
     products = db.products.find()
     return jsonify([
         {
-            "name": p.get("name", "Unnamed Product"),
-            "description": p.get("description", "No description available."),
-            "price": p.get("price", "N/A")
-        } for p in products
+            "name": p.get("name", ""),
+            "description": p.get("description", ""),
+            "price": p.get("price", "")
+        }
+        for p in products
     ])
 
 if __name__ == '__main__':
