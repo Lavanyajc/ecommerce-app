@@ -1,19 +1,13 @@
-
+# 🚀 Overview
 ![Python](https://img.shields.io/badge/python-3.9-blue.svg)
 ![Docker](https://img.shields.io/badge/docker-ready-blue)
 ![MongoDB](https://img.shields.io/badge/database-mongodb-brightgreen)
-![Render](https://img.shields.io/badge/deployed%20on-Render-purple)
 
 
-```
-+------------+            +--------------+            +------------+
-|  Frontend  |──fetch──▶︎ |   Backend    |──query──▶︎ |  MongoDB   |
-| (NGINX)    |            | (Flask API)  |            | (Database) |
-+------------+            +--------------+            +------------+
-   port 8080                port 5000                   port 27017
+This is a full-stack E-Commerce platform built and deployed using modern DevOps tools and best practices. It features a frontend built with HTML, a Flask-based backend, MongoDB for product data, and Docker containers orchestrated via Docker Compose. The application is deployed to AWS EC2 with CI/CD pipelines pushing Docker images to AWS ECR.
 
 
-```
+
 🛒 E-commerce Web App
 
 This is a simple e-commerce application built using:
@@ -37,28 +31,145 @@ This is a simple e-commerce application built using:
 
 ---
 
-## 🗂️ Project Structure
+#
+---
+
+
+---
+
+## 📁 Project Structure
+
+```
+ecommerce-app/
+├── backend/
+│   ├── app.py
+│   ├── Dockerfile
+│   └── requirements.txt
+├── frontend/
+│   ├── index.html
+│   ├── Dockerfile
+│   └── assets/
+│       ├── Luffy.gif
+│       └── run.gif
+├── docker-compose.yml
+```
+
+---
+
+## ⚙️ Features
+
+* 📦 Product catalog pulled from MongoDB
+* 📡 REST API served from Flask
+* 🌐 Frontend consuming API with `fetch`
+* 🔒 Secure OIDC GitHub Actions CI/CD for both frontend & backend
+* ☁️ Deployment-ready with Docker Compose on EC2
+
+---
+
+```
++------------+            +--------------+            +------------+
+|  Frontend  |──fetch──▶︎ |   Backend    |──query──▶︎ |  MongoDB   |
+| (NGINX)    |            | (Flask API)  |            | (Database) |
++------------+            +--------------+            +------------+
+   port 8080                port 5000                   port 27017
+
 
 ```
 
-ecommerce-app/
-│
-├── backend/
-│   ├── app.py
-│   ├── requirements.txt
-│   └── Dockerfile
-│
-├── frontend/
-│   ├── index.html
-│   ├── assets/
-│   └── Dockerfile
-│
-├── docker-compose.yml
-└── README.md
+## 🛠️ Local Development
 
-````
+1. **Clone Repo & Navigate**
+
+```bash
+git clone https://github.com/Lavanyajc/ecommerce-app.git
+cd ecommerce-app
+```
+
+2. **Run Docker Compose Locally**
+
+```bash
+docker compose up --build
+```
+
+3. **Access**
+
+* Frontend: `http://localhost:8080`
+* Backend API: `http://localhost:5000/products`
 
 ---
+
+## 🚚 CI/CD Process (ECR + EC2)
+
+### Frontend & Backend Workflows
+
+* Created separate `.github/workflows/frontend.yml` and `backend.yml`
+* Used secrets:
+
+  * `AWS_ROLE_ARN`, `AWS_REGION`, `ECR_REPOSITORY`, `ECR_REPOSITORY_BACKEND`
+* OIDC-based GitHub role + EC2 instance IAM role
+* Docker image is built, tagged, and pushed to respective ECR repo
+
+### EC2 Deployment
+
+1. **Launched EC2 instance**, attached ECR read-role
+2. **Opened ports 5000, 8080, 22**
+3. **SSH into EC2 & Installed Docker + Compose**
+4. **Pulled Repo & Ran Compose**
+
+```bash
+ssh -i my-key.pem ec2-user@<EC2_PUBLIC_IP>
+sudo yum install docker -y
+sudo systemctl start docker
+# Compose install:
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-x86_64" \
+  -o /usr/local/lib/docker/cli-plugins/docker-compose
+sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+
+git clone https://github.com/Lavanyajc/ecommerce-app.git
+cd ecommerce-app
+docker compose up --build -d
+```
+
+5. **Visit**:
+
+* Frontend: `http://<EC2_PUBLIC_IP>:8080`
+* Backend: `http://<EC2_PUBLIC_IP>:5000/products`
+
+---
+
+## 🧠 Mistakes Fixed
+
+| ❌ Issue                              | ✅ Fix                              |
+| ------------------------------------ | ---------------------------------- |
+| Wrong asset folder name              | Changed `assests` → `assets`       |
+| Backend not reachable                | Used `0.0.0.0` in `app.run()`      |
+| Docker Compose not installed         | Installed properly with CLI plugin |
+| Confused ports / No browser response | Used `curl`, opened correct ports  |
+
+---
+
+---
+
+## 📦 Future Improvements
+
+* Add terrafoem
+* Add checkout/cart functionality
+* Deploy backend to ECS or Fargate
+* Add monitoring (Prometheus + Grafana)
+
+---
+
+## 🏁 Final Outcome
+
+The E-Commerce application is:
+
+* Dockerized (Frontend, Backend, MongoDB)
+* CI/CD integrated via GitHub Actions
+* Deployed & running on AWS EC2
+* Fully functional with product listing page and backend API
+
+---
+
 
 ## 🐳 Docker Compose Setup (Local)
 
@@ -114,7 +225,7 @@ docker pull <your-ecr-url>/ecommerce-backend:latest
 docker run -d -p 5000:5000 <your-ecr-url>/ecommerce-backend:latest
 ```
 
-### ✅ Frontend (Optional ECR or Direct Compose)
+### ✅ Frontend ( you can use simple gh-pages or you can do with ecr+ec2+docker)
 
 You can use Docker Compose or ECR again:
 
@@ -175,11 +286,6 @@ Lavanya Jc — [GitHub](https://github.com/Lavanyajc)
 
 ---
 
-## 📜 License
-
-This project is licensed under the MIT License.
-
-```
 
 ---
 
